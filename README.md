@@ -1,63 +1,80 @@
-# Context and Memory Management Agent (Full-Stack Demo)
+# Context and Memory Management Agent
 
-Node + Express + React implementation of a business context and memory management system.
+Full-stack web app (React + Node/Express) for business decision support using contextual memory.
 
-## What It Demonstrates
-- Multi-layer business context: immediate, historical, temporal, experiential.
-- Memory lifecycle management: active, cooling, stale, archived.
-- Relevance ranking with explainable score breakdown.
-- Graph-style memory links and trend-aware conflict handling.
-- Two business flows:
-  - Invoice decision support
-  - Support ticket escalation
+## Use the Deployed App
 
-## Architecture
-- `client/` React dashboard
-- `server/` Express API and context engine
-  - `MemoryStore`
-  - `ContextRetriever`
-  - `RelevanceEngine`
-  - `DecayManager`
-  - `DecisionEngine`
+### 1. Open the app
+- Deployed URL: `ADD_YOUR_DEPLOYED_LINK_HERE`
 
-## API Endpoints
+### 2. Seed demo data (first step)
+- Go to **Dashboard**
+- Click **Seed Simulation Data**
+- This creates sample suppliers, customers, memories, invoices, tickets, and links.
+
+### 3. Run Invoice decision
+- Open **Invoice Decision** page
+- Select a supplier
+- Set invoice amount and risk tags
+- Click **Evaluate Invoice**
+- Review:
+  - Final decision highlight
+  - Recommended steps
+  - Context evidence ranking
+
+### 4. Run Support escalation
+- Open **Support Escalation** page
+- Select a customer
+- Set support risk tags
+- Click **Evaluate Support Ticket**
+- Review:
+  - Priority and escalation path
+  - Stakeholders and signals
+  - Context evidence ranking
+
+### 5. Explore data and audit trail
+- **Memory Explorer**: inspect stored memories for any entity
+- **Decision Logs**: see historical decision outputs and scores
+
+## App Navigation (Pages)
+- **Dashboard**: overall metrics + recent decisions
+- **Invoice Decision**: invoice risk evaluation flow
+- **Support Escalation**: support priority/escalation flow
+- **Memory Explorer**: memory inspection by entity
+- **Decision Logs**: decision history/audit view
+
+## What This App Demonstrates
+- Immediate + historical + temporal + experiential context usage
+- Memory lifecycle awareness (freshness and decay effects)
+- Relevance ranking with explainable score factors
+- Linked memory retrieval and trend-aware scoring
+- Business-ready decision outputs (not just raw model scores)
+
+## Run Locally (Developer)
+1. Install dependencies:
+```bash
+cd server && npm install
+cd ../client && npm install
+```
+2. Run backend:
+```bash
+cd ../server && npm run dev
+```
+3. Run frontend:
+```bash
+cd ../client && npm run dev
+```
+4. Open:
+```text
+http://127.0.0.1:5173
+```
+
+## API Routes (Reference)
 - `POST /api/seed`
+- `GET /api/dashboard-summary`
 - `GET /api/entities`
 - `GET /api/memories/:entityId`
 - `POST /api/decide/invoice`
 - `POST /api/decide/support`
 - `GET /api/decision-log`
 - `GET /api/health`
-
-## Run Locally
-1. Install server deps:
-```bash
-cd server && npm install
-```
-2. Install client deps:
-```bash
-cd ../client && npm install
-```
-3. Start backend:
-```bash
-cd ../server && npm run dev
-```
-4. Start frontend:
-```bash
-cd ../client && npm run dev
-```
-5. Open the URL printed by Vite (usually `http://localhost:5173`).
-
-## Business Simulation
-`POST /api/seed` generates deterministic mock data:
-- 50 entities (suppliers + customers)
-- 500 invoices
-- 200 support tickets
-- linked historical memory graph
-
-## Why This Fits the Assignment
-- Prioritizes context for current decisions.
-- Handles freshness and staleness explicitly.
-- Prevents overload with top-k and type caps.
-- Resolves changing patterns using trend adjustments.
-- Provides transparent, inspectable reasoning for each decision.
