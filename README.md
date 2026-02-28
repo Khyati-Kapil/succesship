@@ -5,7 +5,7 @@ Full-stack web app (React + Node/Express) for business decision support using co
 ## Use the Deployed App
 
 ### 1. Open the app
-- Deployed URL: `ADD_YOUR_DEPLOYED_LINK_HERE`
+- Deployed URL: `https://succesship-delta.vercel.app/`
 
 ### 2. Seed demo data (first step)
 - Go to **Dashboard**
