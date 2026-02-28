@@ -36,4 +36,8 @@ router.get("/decision-log", (_, res) => {
   res.json({ decisions: MemoryStore.getAll().decisions.slice(-50).reverse() });
 });
 
+router.get("/dashboard-summary", (_, res) => {
+  res.json(MemoryStore.getDashboardSummary());
+});
+
 export default router;

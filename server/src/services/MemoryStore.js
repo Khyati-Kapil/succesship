@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const DB_PATH = path.resolve("server/data/db.json");
+const DB_PATH = path.resolve(process.cwd(), "data/db.json");
 
 function ensureDb() {
   if (!fs.existsSync(DB_PATH)) {
@@ -52,5 +52,27 @@ export const MemoryStore = {
     db.decisions.push(record);
     writeDb(db);
     return record;
+  },
+  getDashboardSummary() {
+    const db = readDb();
+    const supplierCount = db.entities.filter((e) => e.kind === "supplier").length;
+    const customerCount = db.entities.filter((e) => e.kind === "customer").length;
+    const invoiceDecisions = db.decisions.filter((d) => d.output?.kind === "invoice");
+    const supportDecisions = db.decisions.filter((d) => d.output?.kind === "support");
+    const highRiskInvoices = invoiceDecisions.filter((d) => (d.output?.score || 0) >= 0.6).length;
+    const highPrioritySupport = supportDecisions.filter((d) => d.output?.priority === "p1").length;
+
+    return {
+      suppliers: supplierCount,
+      customers: customerCount,
+      memories: db.memories.length,
+      links: db.links.length,
+      invoices: db.invoices.length,
+      tickets: db.tickets.length,
+      decisions: db.decisions.length,
+      highRiskInvoices,
+      highPrioritySupport,
+      recentDecisions: db.decisions.slice(-10).reverse()
+    };
   }
 };

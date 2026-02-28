@@ -1,4 +1,4 @@
-# Context-Aware AI Decision Engine (Full-Stack Demo)
+# Context and Memory Management Agent (Full-Stack Demo)
 
 Node + Express + React implementation of a business context and memory management system.
 
